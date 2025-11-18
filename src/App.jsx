@@ -1,4 +1,3 @@
-import { ChakraProvider, Box, Heading, Button, VStack } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import Game from './components/Game';
 import { questions, prizeLadder } from './data/questions';
@@ -46,55 +45,68 @@ function App() {
     });
   };
 
-  if (gameOver) {
+  if (!gameStarted) {
     return (
-      <Box textAlign="center" py={20}>
-        <VStack spacing={8}>
-          <Heading as="h1" size="2xl" mb={8}>Game Over!</Heading>
-          <Text fontSize="xl">Your final score: ₹{score.toLocaleString()}</Text>
-          <Button 
-            colorScheme="yellow" 
-            size="lg" 
-            onClick={resetGame}
-            px={10}
-            py={6}
-            fontSize="xl"
+      <div className="min-h-screen flex items-center justify-center bg-kbc-gradient p-4">
+        <div className="kbc-card max-w-2xl w-full text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-kbc-gold mb-8 font-display">
+            Kaun Banega Crorepati
+          </h1>
+          <p className="text-lg text-white/90 mb-8">
+            Test your knowledge and win up to ₹7,00,000!
+          </p>
+          <button
+            onClick={startGame}
+            className="kbc-button text-lg px-8 py-4"
           >
-            Play Again
-          </Button>
-        </VStack>
-      </Box>
+            Start Game
+          </button>
+        </div>
+      </div>
     );
   }
 
-  if (!gameStarted) {
+  if (gameOver) {
     return (
-      <Box textAlign="center" py={20}>
-        <VStack spacing={8}>
-          <Heading as="h1" size="2xl" mb={8}>Kaun Banega Crorepati</Heading>
-          <Button 
-            colorScheme="yellow" 
-            size="lg" 
-            onClick={startGame}
-            px={10}
-            py={6}
-            fontSize="xl"
+      <div className="min-h-screen flex items-center justify-center bg-kbc-gradient p-4">
+        <div className="kbc-card max-w-2xl w-full text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-kbc-gold mb-8 font-display">
+            Game Over!
+          </h1>
+          <p className="text-2xl text-white mb-8">
+            Your final score: ₹{score.toLocaleString('en-IN')}
+          </p>
+          <button
+            onClick={resetGame}
+            className="kbc-button text-lg px-8 py-4"
           >
-            Start Game
-          </Button>
-        </VStack>
-      </Box>
+            Play Again
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Box p={4} maxW="1200px" mx="auto">
-      {shuffledQuestions.length > 0 && (
-        <Game 
+    <div className="min-h-screen bg-kbc-gradient p-4 md:p-8">
+      <div className="max-w-6xl mx-auto">
+        <header className="flex justify-between items-center mb-8">
+          <div className="text-kbc-gold font-bold text-xl md:text-2xl">
+            Question {currentQuestionIndex + 1} / {questions.length}
+          </div>
+          <div className="text-kbc-gold-light font-bold text-xl md:text-2xl">
+            ₹{shuffledQuestions[currentQuestionIndex]?.amount.toLocaleString('en-IN') || '0'}
+          </div>
+        </header>
+        
+        <Game
           question={shuffledQuestions[currentQuestionIndex]}
+          onNext={nextQuestion}
+          onEnd={endGame}
+          questionNumber={currentQuestionIndex + 1}
+          totalQuestions={questions.length}
           prizeLadder={prizeLadder}
-          currentLevel={currentQuestionIndex + 1}
-          score={score}
+          currentPrize={shuffledQuestions[currentQuestionIndex]?.amount || 0}
           onAnswerSelected={(isCorrect) => {
             if (isCorrect) {
               const newScore = prizeLadder[currentQuestionIndex]?.amount || 0;
@@ -109,8 +121,8 @@ function App() {
             setUsedLifelines(prev => ({ ...prev, [lifeline]: true }));
           }}
         />
-      )}
-    </Box>
+      </div>
+    </div>
   );
 }
 
