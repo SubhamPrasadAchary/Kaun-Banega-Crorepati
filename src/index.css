@@ -6,7 +6,8 @@
 
 /* Custom styles */
 body {
-  @apply bg-kbc-gradient text-white min-h-screen font-sans;
+  background: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #1a0f2e 100%);
+  @apply text-white min-h-screen font-sans;
 }
 
 /* KBC Card Styles */
