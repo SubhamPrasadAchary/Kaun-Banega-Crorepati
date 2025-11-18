@@ -5,65 +5,69 @@
 @tailwind utilities;
 
 /* Custom styles */
-body {
-  background: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #1a0f2e 100%);
-  @apply text-white min-h-screen font-sans;
+@layer base {
+  body {
+    background: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #1a0f2e 100%);
+    @apply text-white min-h-screen font-sans;
+  }
 }
 
-/* KBC Card Styles */
-.kbc-card {
-  @apply bg-kbc-purple-dark/80 backdrop-blur-sm rounded-lg border-2 border-kbc-gold p-6 shadow-lg shadow-kbc-purple-dark/50;
-  transition: all 0.3s ease;
-}
+@layer components {
+  /* KBC Card Styles */
+  .kbc-card {
+    @apply bg-kbc-purple-dark/80 backdrop-blur-sm rounded-lg border-2 border-kbc-gold p-6 shadow-lg shadow-kbc-purple-dark/50;
+    transition: all 0.3s ease;
+  }
 
-.kbc-card:hover {
-  @apply shadow-2xl shadow-kbc-purple/50 transform -translate-y-1;
-}
+  .kbc-card:hover {
+    @apply shadow-2xl shadow-kbc-purple/50 transform -translate-y-1;
+  }
 
-/* Button Styles */
-.kbc-button {
-  @apply bg-gradient-to-r from-kbc-gold to-kbc-gold-dark text-kbc-purple-dark font-bold py-3 px-6 rounded-full 
-         hover:from-kbc-gold-light hover:to-kbc-gold 
-         focus:outline-none focus:ring-2 focus:ring-kbc-gold focus:ring-opacity-50
-         transition-all duration-300 transform hover:scale-105;
-}
+  /* Button Styles */
+  .kbc-button {
+    @apply bg-gradient-to-r from-kbc-gold to-kbc-gold-dark text-kbc-purple-dark font-bold py-3 px-6 rounded-full 
+           hover:from-kbc-gold-light hover:to-kbc-gold 
+           focus:outline-none focus:ring-2 focus:ring-kbc-gold focus:ring-opacity-50
+           transition-all duration-300 transform hover:scale-105;
+  }
 
-/* Question Text */
-.question-text {
-  @apply text-2xl md:text-3xl font-display font-bold text-kbc-gold mb-6 text-center leading-tight;
-}
+  /* Question Text */
+  .question-text {
+    @apply text-2xl md:text-3xl font-display font-bold text-kbc-gold mb-6 text-center leading-tight;
+  }
 
-/* Option Button */
-.option-button {
-  @apply w-full text-left p-4 my-2 rounded-lg border-2 border-kbc-purple-light bg-kbc-purple/30 
-         hover:bg-kbc-purple/50 hover:border-kbc-gold 
-         focus:outline-none focus:ring-2 focus:ring-kbc-gold
-         transition-all duration-200;
-}
+  /* Option Button */
+  .option-button {
+    @apply w-full text-left p-4 my-2 rounded-lg border-2 border-kbc-purple-light bg-kbc-purple/30 
+           hover:bg-kbc-purple/50 hover:border-kbc-gold 
+           focus:outline-none focus:ring-2 focus:ring-kbc-gold
+           transition-all duration-200;
+  }
 
-/* Lifeline Button */
-.lifeline-button {
-  @apply bg-kbc-purple/50 border-2 border-kbc-gold/50 rounded-full p-2 
-         hover:bg-kbc-purple/80 hover:border-kbc-gold 
-         focus:outline-none focus:ring-2 focus:ring-kbc-gold
-         transition-all duration-200;
-}
+  /* Lifeline Button */
+  .lifeline-button {
+    @apply bg-kbc-purple/50 border-2 border-kbc-gold/50 rounded-full p-2 
+           hover:bg-kbc-purple/80 hover:border-kbc-gold 
+           focus:outline-none focus:ring-2 focus:ring-kbc-gold
+           transition-all duration-200;
+  }
 
-/* Prize Ladder */
-.prize-ladder {
-  @apply bg-kbc-purple-dark/50 border-l-4 border-kbc-gold p-4 rounded-r-lg;
-}
+  /* Prize Ladder */
+  .prize-ladder {
+    @apply bg-kbc-purple-dark/50 border-l-4 border-kbc-gold p-4 rounded-r-lg;
+  }
 
-.prize-level {
-  @apply py-2 px-3 my-1 rounded-r border-r-4 transition-all duration-200;
-}
+  .prize-level {
+    @apply py-2 px-3 my-1 rounded-r border-r-4 transition-all duration-200;
+  }
 
-.prize-level.current {
-  @apply bg-kbc-gold/20 border-kbc-gold-light font-bold text-kbc-gold-light;
-}
+  .prize-level.current {
+    @apply bg-kbc-gold/20 border-kbc-gold-light font-bold text-kbc-gold-light;
+  }
 
-.prize-level.milestone {
-  @apply border-kbc-gold font-bold;
+  .prize-level.milestone {
+    @apply border-kbc-gold font-bold;
+  }
 }
 
 /* Animation for correct answer */
