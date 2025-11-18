@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Box, VStack, HStack, Text, Button, useDisclosure } from '@chakra-ui/react';
 import Question from './Question';
 import Options from './Options';
 import Lifelines from './Lifelines';
@@ -50,68 +49,83 @@ const Game = ({
     // Logic to flip to a new question would go here
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  useEffect(() => {
+    if (usedLifelines.audiencePoll) {
+      openModal();
+    }
+  }, [usedLifelines.audiencePoll]);
+
   return (
-    <HStack alignItems="flex-start" spacing={8}>
-      {/* Left side - Game area */}
-      <Box flex="1">
-        <VStack spacing={6} align="stretch">
-          <Box bg="blue.900" p={4} borderRadius="md" color="white">
-            <Text fontSize="xl" fontWeight="bold">Question {currentLevel}</Text>
-            <Text fontSize="2xl" mt={2} fontWeight="bold">₹{score.toLocaleString()}</Text>
-          </Box>
-          
-          <Question 
-            text={question.question} 
-            currentLevel={currentLevel} 
-          />
-          
-          <Options 
-            options={question.options}
-            correctAnswer={question.correctAnswer}
-            selectedOption={selectedOption}
-            showCorrectAnswer={showCorrectAnswer}
-            onSelect={handleAnswerSelect}
-            fiftyFiftyUsed={fiftyFiftyUsed}
-          />
-          
-          <Lifelines 
-            usedLifelines={usedLifelines}
-            onFiftyFifty={useFiftyFifty}
-            onAudiencePoll={useAudiencePoll}
-            onFlipQuestion={useFlipQuestion}
-          />
-        </VStack>
-      </Box>
+    <div className="game-container flex flex-col md:flex-row gap-8 p-4">
+      <div className="flex-1 flex flex-col gap-6">
+        <div className="bg-kbc-purple-dark p-4 rounded-lg text-white">
+          <h2 className="text-2xl font-bold">Question {currentLevel}</h2>
+          <p className="text-kbc-gold text-3xl font-bold mt-2">₹{score.toLocaleString()}</p>
+        </div>
+        
+        <Question 
+          text={question.question} 
+          currentLevel={currentLevel} 
+        />
+        
+        <Options 
+          options={question.options}
+          correctAnswer={question.correctAnswer}
+          selectedOption={selectedOption}
+          showCorrectAnswer={showCorrectAnswer}
+          onSelect={handleAnswerSelect}
+          fiftyFiftyUsed={fiftyFiftyUsed}
+        />
+        
+        <Lifelines 
+          usedLifelines={usedLifelines}
+          onFiftyFifty={useFiftyFifty}
+          onAudiencePoll={useAudiencePoll}
+          onFlipQuestion={useFlipQuestion}
+        />
+      </div>
       
-      {/* Right side - Prize ladder */}
-      <Box w="300px" bg="gray.100" p={4} borderRadius="md" position="sticky" top="20px">
+      <div className="w-full md:w-80">
         <PrizeLadder 
           prizeLadder={prizeLadder} 
           currentLevel={currentLevel} 
         />
-      </Box>
+      </div>
 
-      {/* Audience Poll Modal */}
-      <Modal isOpen={isOpen} onClose={onClose} title="Audience Poll">
-        <VStack spacing={4}>
-          {question.options.map((option, index) => (
-            <Box key={index} w="100%" bg="blue.50" p={3} borderRadius="md">
-              <Text fontWeight="bold">{option}</Text>
-              <Box 
-                bg="green.400" 
-                h="20px" 
-                mt={2} 
-                borderRadius="md"
-                width={`${Math.floor(Math.random() * 60) + 20}%`}
-              />
-              <Text textAlign="right" mt={1}>
-                {Math.floor(Math.random() * 60) + 20}%
-              </Text>
-            </Box>
-          ))}
-        </VStack>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <div className="bg-kbc-purple-dark p-6 rounded-lg max-w-md w-full">
+          <h3 className="text-2xl font-bold text-kbc-gold mb-4 text-center">Audience Poll Results</h3>
+          <p className="text-white mb-6 text-center">Here's what the audience thinks is the correct answer:</p>
+          <div className="space-y-4">
+            {question.options.map((option, index) => (
+              <div key={index} className="bg-kbc-purple/50 p-3 rounded-lg">
+                <p className="font-bold text-white mb-2">{option}</p>
+                <div className="w-full bg-kbc-purple/30 rounded-full h-4 overflow-hidden">
+                  <div 
+                    className="bg-kbc-gold h-full rounded-full transition-all duration-500"
+                    style={{ width: `${Math.floor(Math.random() * 60) + 20}%` }}
+                  />
+                </div>
+                <p className="text-right mt-1 text-kbc-gold-light font-medium">
+                  {Math.floor(Math.random() * 60) + 20}%
+                </p>
+              </div>
+            ))}
+          </div>
+          <button 
+            onClick={closeModal}
+            className="kbc-button w-full mt-6"
+          >
+            Close
+          </button>
+        </div>
       </Modal>
-    </HStack>
+    </div>
   );
 };
 
