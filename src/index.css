@@ -1,73 +1,141 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Base styles */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #1a0f2e 100%);
+  color: #ffffff;
+  font-family: 'Roboto', Arial, sans-serif;
+}
 
-/* Custom styles */
-@layer base {
-  body {
-    background: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #1a0f2e 100%);
-    @apply text-white min-h-screen font-sans;
+/* KBC Card Styles */
+.kbc-card {
+  background-color: rgba(90, 24, 154, 0.8); /* kbc-purple-dark with opacity */
+  backdrop-filter: blur(4px);
+  border-radius: 0.5rem;
+  border: 2px solid #FFC000; /* kbc-gold */
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(26, 15, 46, 0.5);
+  transition: all 0.3s ease;
+}
+
+.kbc-card:hover {
+  box-shadow: 0 20px 40px rgba(123, 44, 191, 0.5);
+  transform: translateY(-4px);
+}
+
+/* Button Styles */
+.kbc-button {
+  display: inline-block;
+  background-image: linear-gradient(90deg, #FFC000, #D4AF37);
+  color: #5A189A;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-image 0.3s ease;
+}
+
+.kbc-button:hover {
+  background-image: linear-gradient(90deg, #FFD700, #FFC000);
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+}
+
+.kbc-button:focus {
+  box-shadow: 0 0 0 2px rgba(255, 192, 0, 0.5);
+}
+
+/* Question Text */
+.question-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #FFC000;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .question-text {
+    font-size: 1.875rem;
   }
 }
 
-@layer components {
-  /* KBC Card Styles */
-  .kbc-card {
-    @apply bg-kbc-purple-dark/80 backdrop-blur-sm rounded-lg border-2 border-kbc-gold p-6 shadow-lg shadow-kbc-purple-dark/50;
-    transition: all 0.3s ease;
-  }
+/* Option Button */
+.option-button {
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  border: 2px solid #9D4EDD; /* kbc-purple-light */
+  background-color: rgba(123, 44, 191, 0.3);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-  .kbc-card:hover {
-    @apply shadow-2xl shadow-kbc-purple/50 transform -translate-y-1;
-  }
+.option-button:hover {
+  background-color: rgba(123, 44, 191, 0.5);
+  border-color: #FFC000;
+}
 
-  /* Button Styles */
-  .kbc-button {
-    @apply bg-gradient-to-r from-kbc-gold to-kbc-gold-dark text-kbc-purple-dark font-bold py-3 px-6 rounded-full 
-           hover:from-kbc-gold-light hover:to-kbc-gold 
-           focus:outline-none focus:ring-2 focus:ring-kbc-gold focus:ring-opacity-50
-           transition-all duration-300 transform hover:scale-105;
-  }
+.option-button:focus {
+  box-shadow: 0 0 0 2px rgba(255, 192, 0, 0.5);
+}
 
-  /* Question Text */
-  .question-text {
-    @apply text-2xl md:text-3xl font-display font-bold text-kbc-gold mb-6 text-center leading-tight;
-  }
+/* Lifeline Button */
+.lifeline-button {
+  background-color: rgba(123, 44, 191, 0.5);
+  border: 2px solid rgba(255, 192, 0, 0.5);
+  border-radius: 9999px;
+  padding: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-  /* Option Button */
-  .option-button {
-    @apply w-full text-left p-4 my-2 rounded-lg border-2 border-kbc-purple-light bg-kbc-purple/30 
-           hover:bg-kbc-purple/50 hover:border-kbc-gold 
-           focus:outline-none focus:ring-2 focus:ring-kbc-gold
-           transition-all duration-200;
-  }
+.lifeline-button:hover {
+  background-color: rgba(123, 44, 191, 0.8);
+  border-color: #FFC000;
+}
 
-  /* Lifeline Button */
-  .lifeline-button {
-    @apply bg-kbc-purple/50 border-2 border-kbc-gold/50 rounded-full p-2 
-           hover:bg-kbc-purple/80 hover:border-kbc-gold 
-           focus:outline-none focus:ring-2 focus:ring-kbc-gold
-           transition-all duration-200;
-  }
+.lifeline-button:focus {
+  box-shadow: 0 0 0 2px rgba(255, 192, 0, 0.5);
+}
 
-  /* Prize Ladder */
-  .prize-ladder {
-    @apply bg-kbc-purple-dark/50 border-l-4 border-kbc-gold p-4 rounded-r-lg;
-  }
+/* Prize Ladder */
+.prize-ladder {
+  background-color: rgba(26, 15, 46, 0.5);
+  border-left: 4px solid #FFC000;
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
 
-  .prize-level {
-    @apply py-2 px-3 my-1 rounded-r border-r-4 transition-all duration-200;
-  }
+.prize-level {
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  border-right: 4px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
 
-  .prize-level.current {
-    @apply bg-kbc-gold/20 border-kbc-gold-light font-bold text-kbc-gold-light;
-  }
+.prize-level.current {
+  background-color: rgba(255, 192, 0, 0.2);
+  border-color: #FFD700;
+  font-weight: 700;
+  color: #FFD700;
+}
 
-  .prize-level.milestone {
-    @apply border-kbc-gold font-bold;
-  }
+.prize-level.milestone {
+  border-color: #FFC000;
+  font-weight: 700;
 }
 
 /* Animation for correct answer */
@@ -84,10 +152,10 @@
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .question-text {
-    @apply text-xl;
+    font-size: 1.25rem;
   }
-  
+
   .kbc-card {
-    @apply p-4;
+    padding: 1rem;
   }
 }
