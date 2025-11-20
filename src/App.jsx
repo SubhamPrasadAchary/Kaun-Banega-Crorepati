@@ -13,7 +13,6 @@ function App() {
     audiencePoll: false,
     flipQuestion: false
   });
-
   const startGame = () => {
     setGameStarted(true);
     // Shuffle questions for random selection
