@@ -10,7 +10,7 @@ const PrizeLadder = ({ prizeLadder, currentLevel }) => {
         const isCurrent = prize.level === currentLevel;
         const isPast = prize.level < currentLevel;
         const isMilestone = prize.isMilestone;
-        
+      
         return (
           <Box
             key={prize.level}
