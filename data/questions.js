@@ -33,7 +33,7 @@ export const questions = [
 
 // Prize ladder for 21 levels
 export const prizeLadder = [
-  { level: 1, amount: 1000, isMilestone: false },
+  { level: 1, amount: 1000, isMilestone: false }, 
   { level: 2, amount: 2000, isMilestone: false },
   { level: 3, amount: 3000, isMilestone: false },
   { level: 4, amount: 5000, isMilestone: true },
